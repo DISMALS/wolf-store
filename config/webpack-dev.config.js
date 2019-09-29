@@ -1,13 +1,18 @@
 const  path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const postCssPlugins = require('./postcss.plugins.js');
 
 
 module.exports = {
     mode: 'development',
-    entry: path.resolve(__dirname, '../src/index.js'),
+    entry: {
+        app: path.resolve(__dirname, '../src/main.js'),
+        otherentry: path.resolve(__dirname, '../src/other-entry.js')
+    },
     output: {
-        filename: 'main.js',
+        filename:'[name].bundle.js',
         path: path.resolve(__dirname, '../dist') // 此目录是基于项目根目录来进行输出
     },
     module: {
@@ -90,5 +95,22 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            templateParameters: {
+                title: 'WOLF STORE',
+                name: 'wangyong'
+            }, // 模版参数配置
+            template: path.resolve(__dirname, '../src/index.html'),
+            meta: {
+                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+            },
+            hash: true,
+            cache: false,
+            minify:true,
+            xhtml: true
+        })
+    ]
 };

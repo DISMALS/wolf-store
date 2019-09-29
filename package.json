@@ -27,9 +27,11 @@
   },
   "homepage": "https://github.com/DISMALS/wolf-store#readme",
   "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
     "cssnano": "^4.1.10",
     "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "loader-utils": "^1.2.3",

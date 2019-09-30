@@ -50,5 +50,9 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.8.1",
     "webpack-hot-middleware": "^2.25.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "promise-polyfill": "8.1.3"
   }
 }

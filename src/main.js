@@ -1,11 +1,17 @@
 import './styles/index.css';
 import './styles/common.less';
 
+import { cloneDeep } from 'lodash';
+
+import './other-entry';
+
 function component() {
     const ele = document.createElement('div');
     ele.innerHTML = 'hello, webpack';
-    return ele;
+    const newEle = cloneDeep(ele);
     console.log(ele);
+    console.log('newEle', newEle);
+    return ele;
 }
 
 document.body.appendChild(component());

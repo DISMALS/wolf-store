@@ -1,20 +1,33 @@
-const express = require('express');
+const path = require('path');
 const webpack = require('webpack');
-const WebpackDevMiddleWare = require('webpack-dev-middleware');
-const WebpackHotMiddleware = require('webpack-hot-middleware');
+const WebpackDevServer = require('webpack-dev-server');
 
-const app = express();
-const config = require('./webpack-dev.config');
-const compiler = webpack(config);
+const weboackConfig = require('./webpack-dev.config');
 
+const options = {
+    hot: true,
+    open: true,
+    port: 6900,
+    compress: true,
+    // lazy: true,
+    watchContentBase: true,
+    contentBase: path.resolve(__dirname, '../dist'),
+    // headers: {  // set heasers for response
 
-app.use(WebpackDevMiddleWare(compiler, {
-    publicPath: config.output.publicPath
-}));
+    // },
+    // // https: true,
+    // historyApiFallback: false,
+    // states: {
+    //     cached: false,
+    //     colors: true
+    // }
+};
 
-app.use(WebpackHotMiddleware(compiler));
+WebpackDevServer.addDevServerEntrypoints(weboackConfig, options);
 
+const compiler = webpack(weboackConfig);
+const server = new WebpackDevServer(compiler, options);
 
-app.listen('6900', () => {
-    console.log('app listen port is 6900');
+server.listen(6900, '127.0.0.1', () => {
+    console.log('listen post 127.0.0.1:6900');
 });

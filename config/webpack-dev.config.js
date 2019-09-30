@@ -9,19 +9,45 @@ const postCssPlugins = require('./postcss.plugins.js');
 module.exports = {
     mode: 'development',
     entry: [
+        path.resolve(__dirname, '../src/polyfill.js'),
         path.resolve(__dirname, '../src/main.js')
     ],
     output: {
-        filename:'[name].bundle.js',
+        filename: path.join('component', '[hash:20]-[name].js?[hash:10]'),
+        chunkFilename: path.join('component', '[hash:20]-[name].js?[hash:10]'),
         path: path.resolve(__dirname, '../dist'), // 此目录是基于项目根目录来进行输出
-        publicPath: '/',
+        publicPath: '/', // 请求资源的地址
+        libraryTarget: 'umd', // 全局资源变量定义类型
+        auxiliaryComment: 'module comment' // 为输出的模块添加备注
     },
     devtool: 'inline-source-map',
-    devServer: {
-        hot: true,
-        open: true,
-        port: 6900,
-        contentBase: path.resolve(__dirname, '../dist')
+    optimization: {
+        splitChunks:{
+            // chunks: 'all',
+            maxInitialRequests: 3,
+            maxAsyncRequests: 5,
+            automaticNameDelimiter: '-', // 生成模块文件名称的分隔符
+            automaticNameMaxLength: 109, // 生成名称的长度
+            minChunks: 2, // 最少几个模块共享一个模块
+            minSize: 20000, // 模块大小超过这个值则进行分割
+            maxSize:0,
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    reuseExistingChunk: true,
+                    // cacheGroupKey的值在这里是commons
+                    name(module, chunks, cacheGroupKey) {
+                        const moduleDirNames = module.identifier().split('/');
+                        const moduleFileName = moduleDirNames[moduleDirNames.length - 1].split('.')[0]; // 被引用的module的文件名
+                        const allChunksName = chunks.map(chunk => chunk.name).join('-'); // 引用module的模块的名字集合
+                        return `${cacheGroupKey}`;
+                    },
+                    chunks: 'all',
+                    priority: -10,
+                    minChunks: 1, // 最少几个模块共享一个模块
+                }
+            }
+        }
     },
     module: {
         rules: [
@@ -112,7 +138,7 @@ module.exports = {
                 title: 'WOLF STORE',
                 name: 'wangyong'
             }, // 模版参数配置
-            path: '../dist/index.html',
+            path: '../dist/index.html?[hash:20]',
             template: path.resolve(__dirname, '../src/index.html'),
             meta: {
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'

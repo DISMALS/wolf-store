@@ -15,6 +15,6 @@ app.use(WebpackDevMiddleWare(compiler, {
 app.use(WebpackHotMiddleware(compiler));
 
 
-app.listen('8080', () => {
-    console.log('app listen port is 8080');
+app.listen('6900', () => {
+    console.log('app listen port is 6900');
 });

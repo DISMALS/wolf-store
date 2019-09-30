@@ -4,10 +4,10 @@
   "description": "learning by self",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config=./webpack-dev.config.js",
-    "watch": "webpack --watch --config=./webpack-dev.config.js",
-    "start": "webpack-dev-server --open",
-    "server": "node ./server.js"
+    "build": "webpack --config=./config/webpack-dev.config.js",
+    "watch": "webpack --watch --config=./config/webpack-dev.config.js",
+    "start": "webpack-dev-server --config=./config/webpack-dev.config.js",
+    "server": "node ./config/server.js"
   },
   "repository": {
     "type": "git",

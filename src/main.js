@@ -3,7 +3,7 @@ import './styles/common.less';
 
 function component() {
     const ele = document.createElement('div');
-    ele.innerHTML = 'hello, webpackff';
+    ele.innerHTML = 'hello, webpack';
     return ele;
     console.log(ele);
 }

@@ -1,11 +1,8 @@
 import './styles/index.css';
 import './styles/common.less';
-
 import { cloneDeep } from 'lodash';
 
-import './other-entry';
-
-function component() {
+const component = () => {
     const ele = document.createElement('div');
     ele.innerHTML = 'hello, webpack';
     const newEle = cloneDeep(ele);

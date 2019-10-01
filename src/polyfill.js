@@ -1,1 +1,2 @@
-import 'promise-polyfill/src/polyfill';
+// import "core-js/core/function";
+// import "regenerator-runtime/runtime";

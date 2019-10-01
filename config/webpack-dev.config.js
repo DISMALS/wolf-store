@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 const postCssPlugins = require('./postcss.plugins.js');
 const devServerOptions = require('./devServerConfig');
 console.log(process.env.NODE_ENV);
@@ -76,6 +78,7 @@ module.exports = (...e) => {
                     test: /\.css$/,
                     use: [
                         'style-loader',
+                        'vue-style-loader',
                         {
                             loader: 'css-loader',
                             options: {
@@ -148,7 +151,7 @@ module.exports = (...e) => {
                             }
                         }
                     ]
-                }, { // js/jsx/ts/tsx/vue
+                }, { // js/jsx
                     test: /\.(js|jsx|ts|tsx|vue)$/,
                     exclude: /node_modules/,
                     use: [
@@ -156,6 +159,12 @@ module.exports = (...e) => {
                             loader: 'babel-loader'
                         }
                     ]
+                }, { // vue
+                    test: /\.vue$/,
+                    use: ['vue-loader']
+                }, { // ts/tsx
+                    test: /\.tsx?$/,
+                    use: ['ts-loader']
                 }
             ]
         },
@@ -163,6 +172,7 @@ module.exports = (...e) => {
             // new webpack.DefinePlugin({
             //     'process.env.NODE_ENV':
             // }),
+            new VueLoaderPlugin(),
             new webpack.HotModuleReplacementPlugin(),
             new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
@@ -180,7 +190,10 @@ module.exports = (...e) => {
                 minify:true,
                 xhtml: true
             })
-        ]
+        ],
+        resolve: {
+            extensions: ['.js', '.ts', '.tsx', '.vue', 'jsx', '.html']
+        }
     }
 
 };

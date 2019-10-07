@@ -4,7 +4,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const postCssPlugins = require('./postcss.plugins.js');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const webProd = require('./webpack-prod.config');
+const webDev = require('./webpack-dev.config');
 
 const VERSION = JSON.stringify(Date.now());
 const NODE_ENV = process.env.NODE_ENV || 'development'; // 环境变量，production/development
@@ -15,7 +18,7 @@ console.log(NODE_ENV);
 
 module.exports = (...env) => {
     const publicPath = require(`${publicFilePath}/environment.${env.environment || 'dev'}`); // 获取输出文件的公共地址
-    console.log(env, NODE_ENV, publicPath);
+    // console.log(env, NODE_ENV, publicPath);
     const config = {
         mode: NODE_ENV,
         entry: [
@@ -31,10 +34,8 @@ module.exports = (...env) => {
             auxiliaryComment: 'wolf wang. module comment' // 为输出的模块添加备注
         },
         optimization: {
-            usedExports: true,
             moduleIds: 'natural',
             nodeEnv: NODE_ENV,
-            sideEffects: true,
             splitChunks: {
                 chunks: 'all',
                 maxInitialRequests: 3,
@@ -45,6 +46,37 @@ module.exports = (...env) => {
                 minSize: 30000, // 模块大小超过这个值则进行分割
                 maxSize:0,
                 name: true,
+                cacheGroups: {
+                    vendors: {
+                        // /[\\/]node_modules[\\/]/
+                        test(module, chunks) {
+                            // console.log(module.resource);
+                            return module.resource === undefined || (module.resource.includes('node_modules') && !module.resource.includes('polyfill'));
+                        },
+                        reuseExistingChunk: true,
+                        // cacheGroupKey的值在这里是commons
+                        name(module, chunks, cacheGroupKey) {
+                            const moduleDirNames = module.identifier().split('/');
+                            const moduleFileName = moduleDirNames[moduleDirNames.length - 1].split('.')[0]; // 被引用的module的文件名
+                            const allChunksName = chunks.map(chunk => chunk.name).join('-'); // 引用module的模块的名字集合
+                            return `${cacheGroupKey}`;
+                        },
+                        chunks: 'all',
+                        priority: -10,
+                        minChunks: 1, // 最少几个模块共享一个模块
+                    },
+                    polyfill: {
+                        test(module, chunks) {
+                            return module.resource && module.resource.includes('polyfill');
+                        },
+                        reuseExistingChunk: true,
+                        name: 'polyfill',
+                        chunks: 'all',
+                        priority: -5,
+                        minChunks: 1,
+                        minSize: 10000
+                    }
+                }
             },
             runtimeChunk: {
                 name: 'runtime'
@@ -162,11 +194,15 @@ module.exports = (...env) => {
             })
         ],
         resolve: {
-            extensions: ['.js', '.ts', '.tsx', '.vue', 'jsx']
+            extensions: ['.js', '.ts', '.tsx', '.vue', 'jsx'],
+            modules: [path.resolve(__dirname, '../src'), 'node_modules'],
+            unsafeCache: false
         }
     }
 
+    if (isProd) { // 生产环境
+        return webProd(config);
+    }
 
-
-    return config;
+    return webDev(config); // 开发环境
 }

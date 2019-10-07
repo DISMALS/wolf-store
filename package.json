@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch --config=./config/common.config.js",
     "prod": "cross-env NODE_ENV=production webpack --config=./config/common.config.js --environment=prod",
-    "uat": "cross-env NODE_ENV=development webpack --config=./config/common.config.js --environment=uat",
+    "uat": "cross-env NODE_ENV=production webpack --config=./config/common.config.js --environment=uat",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config=./config/common.config.js --environment=dev"
   },
   "repository": {

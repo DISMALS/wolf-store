@@ -1,6 +1,6 @@
 import './styles/index.css';
 import './styles/common.less';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, clone } from 'lodash';
 
 const component = () => {
     const ele = document.createElement('div');

@@ -26,6 +26,7 @@ module.exports = {
             {
                 corejs: 3
             }
-        ]
+        ],
+        ['@babel/plugin-syntax-dynamic-import']
     ]
 }

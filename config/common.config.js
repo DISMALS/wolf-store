@@ -1,10 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 
+// const ExchangeServerUrlLoader = require('../custome-loaders/serverurl-loader');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const postCssPlugins = require('./postcss.plugins.js');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+// const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const webProd = require('./webpack-prod.config');
 const webDev = require('./webpack-dev.config');
@@ -13,12 +15,12 @@ const VERSION = JSON.stringify(Date.now());
 const NODE_ENV = process.env.NODE_ENV || 'development'; // 环境变量，production/development
 const isProd = NODE_ENV === 'production';
 
-const publicFilePath = path.resolve(__dirname, '../src/environment/');
-console.log(NODE_ENV);
+// const publicFilePath = path.resolve(__dirname, '../src/environment/');
 
 module.exports = (...env) => {
-    const publicPath = require(`${publicFilePath}/environment.${env.environment || 'dev'}`); // 获取输出文件的公共地址
-    // console.log(env, NODE_ENV, publicPath);
+    // console.log(env);
+    // const publicPath = require(`${publicFilePath}/environment.${env[0]['environment'] || 'dev'}`); // 获取输出文件的公共地址
+    // console.log(publicPath);
     const config = {
         mode: NODE_ENV,
         entry: [
@@ -29,7 +31,7 @@ module.exports = (...env) => {
             filename: path.join('script', '[hash:20]-[name].js?[hash:10]'),
             chunkFilename: path.join('script', '[hash:20]-[name].js?[hash:10]'),
             path: path.resolve(__dirname, '../dist'),
-            publicPath: publicPath.serverUrl,
+            // publicPath: '../',
             libraryTarget: 'umd', // 全局资源变量定义类型
             auxiliaryComment: 'wolf wang. module comment' // 为输出的模块添加备注
         },
@@ -56,9 +58,9 @@ module.exports = (...env) => {
                         reuseExistingChunk: true,
                         // cacheGroupKey的值在这里是commons
                         name(module, chunks, cacheGroupKey) {
-                            const moduleDirNames = module.identifier().split('/');
-                            const moduleFileName = moduleDirNames[moduleDirNames.length - 1].split('.')[0]; // 被引用的module的文件名
-                            const allChunksName = chunks.map(chunk => chunk.name).join('-'); // 引用module的模块的名字集合
+                            // const moduleDirNames = module.identifier().split('/');
+                            // const moduleFileName = moduleDirNames[moduleDirNames.length - 1].split('.')[0]; // 被引用的module的文件名
+                            // const allChunksName = chunks.map(chunk => chunk.name).join('-'); // 引用module的模块的名字集合
                             return `${cacheGroupKey}`;
                         },
                         chunks: 'all',

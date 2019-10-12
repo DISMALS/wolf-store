@@ -2,8 +2,20 @@
 module.exports = function () {
     return (loader) => ([
         require('postcss-preset-env')({
+            stage: 0,
+            features: {
+                'nesting-rules': true
+            },
+            browsers: [
+                "ie >= 8",
+                "ff >= 30",
+                "chrome >= 34",
+                "safari >= 7",
+                "opera >= 23"
+            ],
             autoprefixer: {
-                grid: true
+                grid: true,
+                
             }
         }),
         require('postcss-import')(),

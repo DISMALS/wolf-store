@@ -1,12 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 
-// const ExchangeServerUrlLoader = require('../custome-loaders/serverurl-loader');
+const HappyPackPlugin = require('./happypack-config');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const postCssPlugins = require('./postcss.plugins.js');
-// const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const webProd = require('./webpack-prod.config');
 const webDev = require('./webpack-dev.config');
@@ -15,12 +14,7 @@ const VERSION = JSON.stringify(Date.now());
 const NODE_ENV = process.env.NODE_ENV || 'development'; // 环境变量，production/development
 const isProd = NODE_ENV === 'production';
 
-// const publicFilePath = path.resolve(__dirname, '../src/environment/');
-
 module.exports = (...env) => {
-    // console.log(env);
-    // const publicPath = require(`${publicFilePath}/environment.${env[0]['environment'] || 'dev'}`); // 获取输出文件的公共地址
-    // console.log(publicPath);
     const config = {
         mode: NODE_ENV,
         entry: [
@@ -52,7 +46,6 @@ module.exports = (...env) => {
                     vendors: {
                         // /[\\/]node_modules[\\/]/
                         test(module, chunks) {
-                            // console.log(module.resource);
                             return module.resource === undefined || (module.resource.includes('node_modules') && !module.resource.includes('polyfill'));
                         },
                         reuseExistingChunk: true,
@@ -88,9 +81,9 @@ module.exports = (...env) => {
             rules: [
                 { // css
                     test: /\.css$/,
+                    exclude: /node_modules/,
                     use: [
                         'style-loader',
-                        'vue-style-loader',
                         {
                             loader: 'css-loader',
                             options: {
@@ -107,6 +100,7 @@ module.exports = (...env) => {
                     ]
                 }, { // less
                     test: /\.less$/,
+                    exclude: /node_modules/,
                     use: [
                         'style-loader',
                         {
@@ -130,6 +124,7 @@ module.exports = (...env) => {
                     ]
                 }, { // files
                     test: /\.(png|jpg|jpeg|gif|svg)$/,
+                    exclude: /node_modules/,
                     use: [
                         {
                             loader: 'url-loader',
@@ -146,6 +141,7 @@ module.exports = (...env) => {
                     ]
                 }, { // fonts 
                     test: /\.(ttf|eot|otf|woff)$/,
+                    exclude: /node_modules/,
                     use: [
                         {
                             loader: 'file-loader',
@@ -158,34 +154,43 @@ module.exports = (...env) => {
                         }
                     ]
                 }, { // js/jsx
-                    test: /\.(js|jsx|ts|tsx|vue)$/,
+                    test: /\.jsx?$/,
                     exclude: /node_modules/,
-                    use: ['babel-loader']
-                }, { // vue
-                    test: /\.vue$/,
-                    use: ['vue-loader'],
-                    exclude: /node_modules/
+                    use: ['happypack/loader?id=thread_pool_js']
                 }, { // ts/tsx
                     test: /\.tsx?$/,
-                    use: ['ts-loader'],
+                    use: ['happypack/loader?id=thread_pool_ts'],
                     exclude: /node_modules/
+                }, { // html, 注意在处理index.html时，会和HtmlWebpackPlugin冲突，因此index.html改名为index.ejs
+                    test: /\.html$/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: 'html-loader',
+                            options: {
+                                attrs: ['img:src', 'img:data-src', 'audio:src'],
+                                minimize:true 
+                            }
+                        }
+                    ]
                 }
             ]
         },
         plugins: [
+            new CleanWebpackPlugin({
+                cleanOnceBeforeBuildPatterns: [path.join(__dirname, '../dist')]
+            }),
             new webpack.DefinePlugin({
                 VERSION,
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }),
-            // new VueLoaderPlugin(), // vue
-            new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
                 templateParameters: {
                     title: 'WOLF STORE',
                     name: 'wangyong'
                 }, // 模版参数配置
                 filename: `index.html?${VERSION}`,
-                template: path.resolve(__dirname, '../src/index.html'),
+                template: path.resolve(__dirname, '../src/index.ejs'),
                 meta: {
                     viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
                 },
@@ -193,10 +198,17 @@ module.exports = (...env) => {
                 cache: false,
                 minify:true,
                 xhtml: true
-            })
+            }),
+            HappyPackPlugin('thread_pool_js', [{ // 针对js文件执行多进程打包
+                loader: 'babel-loader',
+                options: {
+                    cacheDirectory: true
+                }
+            }]),
+            HappyPackPlugin('thread_pool_ts', ['ts-loader']) // 针对ts文件执行多进程打包
         ],
         resolve: {
-            extensions: ['.js', '.ts', '.tsx', '.vue', 'jsx'],
+            extensions: ['.js', '.ts', '.tsx', '.vue', '.jsx'],
             modules: [path.resolve(__dirname, '../src'), 'node_modules'],
             unsafeCache: false
         }

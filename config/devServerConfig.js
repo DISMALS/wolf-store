@@ -18,9 +18,9 @@ module.exports = {
     hot: true,
     open: true,
     port: 6900,
-    compress: true,
+    compress: true, // 服务器返回浏览器的时候是否启动gzip压缩
     watchContentBase: true,
-    contentBase: path.resolve(__dirname, '../dist'),
+    contentBase: path.resolve(__dirname, '../dist'), // 静态文件根目录
     headers: {  // set heasers for response
         'Expires': 0,
         'Etag': 0,

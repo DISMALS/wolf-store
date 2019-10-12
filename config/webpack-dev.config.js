@@ -11,10 +11,14 @@ module.exports = (config) => {
             filename: path.join('script', '[hash:20]-[name].js?[hash:10]'),
             chunkFilename: path.join('script', '[hash:20]-[name].js?[hash:10]'),
         },
-        devtool: 'inline-source-map',
+        devtool: 'cheap-module-eval-source-map',
         devServer: devServerOptions,
         watchOptions: {
             ignored: /node_modules/
+        },
+        optimization: {
+            ...config.optimization,
+            usedExports: true, // tree shaking
         }
     };
     config.plugins.push(new webpack.HotModuleReplacementPlugin());

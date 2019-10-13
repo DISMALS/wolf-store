@@ -13,7 +13,7 @@ if ('serviceWorker' in navigator) { // 离线缓存策略
 import './styles/index.css';
 import './styles/common.less';
 import { cloneDeep, clone } from 'lodash';
-import subFn from './sub';
+import subFn from './components/sub';
 const component = () => {
     const ele = document.createElement('div');
     ele.innerHTML = 'hello, webpack';

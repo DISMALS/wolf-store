@@ -1,8 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const HappyPackPlugin = require('./happypack-config');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const postCssPlugins = require('./postcss.plugins.js');
@@ -156,10 +154,10 @@ module.exports = (...env) => {
                 }, { // js/jsx
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
-                    use: ['happypack/loader?id=thread_pool_js']
+                    use: isProd ? ['happypack/loader?id=thread_pool_js'] : ['babel-loader']
                 }, { // ts/tsx
                     test: /\.tsx?$/,
-                    use: ['happypack/loader?id=thread_pool_ts'],
+                    use: isProd ? ['happypack/loader?id=thread_pool_ts'] : ['ts-loader'],
                     exclude: /node_modules/
                 }, { // html, 注意在处理index.html时，会和HtmlWebpackPlugin冲突，因此index.html改名为index.ejs
                     test: /\.html$/,
@@ -198,14 +196,7 @@ module.exports = (...env) => {
                 cache: false,
                 minify:true,
                 xhtml: true
-            }),
-            HappyPackPlugin('thread_pool_js', [{ // 针对js文件执行多进程打包
-                loader: 'babel-loader',
-                options: {
-                    cacheDirectory: true
-                }
-            }]),
-            HappyPackPlugin('thread_pool_ts', ['ts-loader']) // 针对ts文件执行多进程打包
+            })
         ],
         resolve: {
             extensions: ['.js', '.ts', '.tsx', '.vue', '.jsx'],

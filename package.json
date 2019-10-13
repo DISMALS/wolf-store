@@ -67,10 +67,12 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.8.1",
     "webpack-hot-middleware": "^2.25.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "webpack-parallel-uglify-plugin": "^1.1.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.6.2",
+    "core-js": "^3.2.1",
     "corejs": "^1.0.0",
     "lodash": "^4.17.15",
     "workbox-webpack-plugin": "^4.3.1"

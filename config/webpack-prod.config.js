@@ -26,8 +26,6 @@ module.exports = (config) => {
             cleanupOutdatedCaches: true,  // 尝试删除老版本缓存
             importWorkboxFrom: 'local',
             swDest: path.resolve(__dirname, '../dist/service-wroker.js'), // 输出 Service worker 文件
-            globPatterns: ['**/*.{html,js,jsx,ts,tsx,vue,css,png.jpg}'], // 匹配的文件
-            globIgnores: ['service-wroker.js'], // 忽略的文件
             runtimeCaching: [
                 // 配置路由请求缓存
                 {

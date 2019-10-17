@@ -39,7 +39,7 @@ module.exports = (config) => {
         new ParallelUglifyPlugin({ // 加速webpack打包，js文件优化
             test: /\.(js|jsx|ts|tsx|vue)$/,
             include: [path.resolve(__dirname, '../src')],
-            xxclude: ['node_modules'],
+            exclude: ['node_modules'],
             uglifyJS: {
                 output: {
                     beautify: false,

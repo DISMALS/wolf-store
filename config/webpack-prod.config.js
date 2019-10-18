@@ -40,7 +40,7 @@ module.exports = (config) => {
             exclude: ['node_modules'],
             uglifyJS: {
                 output: {
-                    beautify: false,
+                    // beautify: false,
                 },
                 compress: {
                     drop_console: true,
@@ -54,7 +54,16 @@ module.exports = (config) => {
                 cacheDirectory: true
             }
         }]),
-        HappyPackPlugin('thread_pool_ts', ['ts-loader']) // 针对ts文件执行多进程打包
+        HappyPackPlugin('thread_pool_ts', [
+            {
+                loader: 'babel-loader',
+                options: {
+                    cacheDirectory: true
+                }
+            }, { // 针对ts文件执行多进程打包
+                loader: 'ts-loader'
+            }
+        ])
     );
     return config;
 }

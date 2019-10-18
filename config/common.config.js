@@ -157,7 +157,7 @@ module.exports = (...env) => {
                     use: isProd ? ['happypack/loader?id=thread_pool_js'] : ['babel-loader']
                 }, { // ts/tsx
                     test: /\.tsx?$/,
-                    use: isProd ? ['happypack/loader?id=thread_pool_ts'] : ['ts-loader'],
+                    use: ['ts-loader'],
                     exclude: /node_modules/
                 }, { // html, 注意在处理index.html时，会和HtmlWebpackPlugin冲突，因此index.html改名为index.ejs
                     test: /\.html$/,
@@ -196,6 +196,9 @@ module.exports = (...env) => {
                 cache: false,
                 minify:true,
                 xhtml: true
+            }),
+            new webpack.DllReferencePlugin({
+                manifest: path.resolve(__dirname, '../src/manifest.json')
             })
         ],
         resolve: {

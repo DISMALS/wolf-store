@@ -12,7 +12,8 @@
     "watch": "webpack --watch --config=./config/common.config.js",
     "prod": "cross-env NODE_ENV=production webpack --config=./config/common.config.js --env.environment=prod",
     "uat": "cross-env NODE_ENV=development webpack --config=./config/common.config.js --env.environment=uat",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config=./config/common.config.js --env.environment=dev"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config=./config/common.config.js --env.environment=dev",
+    "boundle:dll": "cross-env NODE_ENV=development webpack --config=./config/webpack.dll.js --env.environment=dev"
   },
   "repository": {
     "type": "git",
@@ -77,6 +78,8 @@
   "dependencies": {
     "@babel/runtime": "^7.6.2",
     "@babel/runtime-corejs3": "^7.6.3",
+    "@types/react": "^16.9.9",
+    "@types/react-dom": "^16.9.2",
     "core-js": "^3.2.1",
     "corejs": "^1.0.0",
     "lodash": "^4.17.15",

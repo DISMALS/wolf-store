@@ -11,6 +11,7 @@ module.exports = (config) => {
             filename: path.join('script', '[contenthash:20]-[name].js?[contenthash:10]'),
             chunkFilename: path.join('script', '[contenthash:20]-[name].js?[contenthash:10]'),
         },
+        devtool: 'cheap-module-source-map',
         optimization: {
             ...config.optimization,
             minimize: true,

@@ -2,7 +2,11 @@
   "name": "wolf-store",
   "version": "1.0.0",
   "description": "learning by self",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css",
+    "*.less",
+    "*.scss"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch --config=./config/common.config.js",
@@ -78,6 +82,7 @@
     "lodash": "^4.17.15",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "workbox-webpack-plugin": "^4.3.1"
   }

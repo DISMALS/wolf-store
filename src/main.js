@@ -2,6 +2,7 @@ import serviceWorker from './serviceWorker';
 import './styles/index.css';
 import './styles/common.less';
 import { cloneDeep, clone } from 'lodash';
+import Male from  './components/reactTs';
 
 /**
  * 启动本地缓存机制，实现离线访问
@@ -20,3 +21,5 @@ const component = () => {
 }
 
 document.body.appendChild(component());
+const newNewman = new Male('wangyong', '23');
+console.log(newNewman.consoleName());

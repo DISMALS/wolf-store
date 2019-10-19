@@ -1,6 +1,9 @@
 const path = require('path');
+const webpack = require('webpack');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const HappyPackPlugin = require('./happypack-config');
 module.exports = (config) => {
@@ -15,6 +18,10 @@ module.exports = (config) => {
         optimization: {
             ...config.optimization,
             minimize: true,
+            minimizer: [
+                new TerserWebpackPlugin(),
+                new OptimizeCssAssetsPlugin()
+            ],
             removeEmptyChunks: true,
             removeAvailableModules: true
         }
@@ -64,7 +71,10 @@ module.exports = (config) => {
             }, { // 针对ts文件执行多进程打包
                 loader: 'ts-loader'
             }
-        ])
+        ]),
+        new webpack.DllReferencePlugin({
+            manifest: path.resolve(__dirname, '../src/manifest.json')
+        })
     );
     return config;
 }

@@ -23,8 +23,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, '../src/assets/static/'),
-        filename: 'manifest_dll.js',
-        library: 'manifest_dll'
+        filename: 'manifest_dll.js'
     },
     plugins: [
         new webpack.DllPlugin({

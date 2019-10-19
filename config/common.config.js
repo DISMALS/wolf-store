@@ -3,6 +3,7 @@ const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postCssPlugins = require('./postcss.plugins.js');
 
 const webProd = require('./webpack-prod.config');
@@ -12,13 +13,24 @@ const VERSION = JSON.stringify(Date.now());
 const NODE_ENV = process.env.NODE_ENV || 'development'; // 环境变量，production/development
 const isProd = NODE_ENV === 'production';
 
+function findModule (m) {
+    if (m.issure) {
+       return findModule(m.issure);
+    }
+    if (m.name) {
+        return m.name;
+    }
+    return false;
+}
+
 module.exports = (...env) => {
     const config = {
         mode: NODE_ENV,
-        entry: [
-            path.resolve(__dirname, '../src/polyfill.js'),
-            path.resolve(__dirname, '../src/main.js')
-        ],
+        entry: {
+            polyfill: path.resolve(__dirname, '../src/polyfill.js'),
+            main: path.resolve(__dirname, '../src/main.tsx'),
+
+        },
         output: {
             filename: path.join('script', '[hash:20]-[name].js?[hash:10]'),
             chunkFilename: path.join('script', '[hash:20]-[name].js?[hash:10]'),
@@ -68,7 +80,19 @@ module.exports = (...env) => {
                         priority: -5,
                         minChunks: 1,
                         minSize: 10000
-                    }
+                    },
+                    // styles: {
+                    //     test(module, chunks) {
+                    //         console.log(module.constructor.name);
+                    //         console.log(module.issuer.name);
+                    //         return module.constructor.name === 'cssModule' && findModule(module) === 'main';
+                    //     },
+                    //     name: 'styles',
+                    //     test: /index.less/,
+                    //     chunks: 'all',
+                    //     minChunks: 1
+
+                    // }
                 }
             },
             runtimeChunk: {
@@ -81,11 +105,17 @@ module.exports = (...env) => {
                     test: /\.css$/,
                     exclude: /node_modules/,
                     use: [
-                        'style-loader',
+                        {
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                hmr: !isProd,
+                                reloadAll: true
+                            }
+                        },
                         {
                             loader: 'css-loader',
                             options: {
-                                modules: true,
+                                modules: false,
                                 sourceMap: !isProd
                             }
                         }, {
@@ -100,12 +130,18 @@ module.exports = (...env) => {
                     test: /\.less$/,
                     exclude: /node_modules/,
                     use: [
-                        'style-loader',
+                        {
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                hmr: !isProd,
+                                reloadAll: true
+                            }
+                        },
                         {
                             loader: 'css-loader',
                             options: {
                                 sourceMap: !isProd,
-                                modules: true
+                                modules: false
                             }
                         }, {
                             loader: 'postcss-loader',
@@ -197,8 +233,10 @@ module.exports = (...env) => {
                 minify:true,
                 xhtml: true
             }),
-            new webpack.DllReferencePlugin({
-                manifest: path.resolve(__dirname, '../src/manifest.json')
+            new MiniCssExtractPlugin({
+                filename: isProd ? './styels/[hash]-[name].css' : './styels/[hash]-[name].css',
+                chunkFilename: isProd ? './styels/[hash]-[name]-chunk.css' : './styels/[name]-chunk.css',
+                ignoreOrder: false
             })
         ],
         resolve: {

@@ -1,3 +1,98 @@
-#root{
-    font-size: 30px;
+@import './color.less';
+@import './font-size.less';
+@import './iconfont.less';
+@import './padding-margin.less';
+@import './width-height.less';
+*{margin:0;padding:0;}
+html, body{
+    margin:0;
+    padding: 0;
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+    background-color:@dee2ee;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    font-family: 'PingFangSC-Regular', 'Microsoft Yahei', '微软雅黑', Verdana, Arial, Helvetica, sans-serif !important;
+}
+a {
+    cursor: pointer;
+    color:@000000;
+}
+a:hover, a:active{
+    color:@4991f5;
+    text-decoration: none;
+}
+a:link{
+    color:@000000;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+dl,dt,dd,ul,li,ol{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+// scrollbar
+::-webkit-scrollbar {
+    // background: #dbe3ec;
+    width: 10px;
+    height: 10px;
+}
+  
+/*定义滚动条轨道 内阴影+圆角*/
+
+::-webkit-scrollbar-track {
+    // box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 0;
+    background-color: @eaeaea;
+}
+
+/*定义滑块 内阴影+圆角*/
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0; // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.534);
+    background-color: @c1c1c1;
+}
+
+// 输入框占位提示语样式
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: @bdc4cd !important;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: @bdc4cd !important;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color: @bdc4cd !important;
+}
+
+.t-a-l{ text-align: left;}
+.t-a-c{ text-align: center;}
+.t-a-r{ text-align: right;}
+
+.f-l{float: left;}
+.f-r{float: right;}
+
+.posintion-a{position: absolute;}
+.posintion-r{position: relative;}
+.posintion-f{position: fixed;}
+
+.disply-n{display: none;}
+.disply-b{display: block;}
+.disply-i{display: inline;}
+.disply-i-b{display: inline-block;}
+.disply-f{display: flex;}
+.flex-1{flex:1;}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
 }

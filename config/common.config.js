@@ -109,7 +109,8 @@ module.exports = (...env) => {
                             loader: MiniCssExtractPlugin.loader,
                             options: {
                                 hmr: !isProd,
-                                reloadAll: true
+                                reloadAll: true,
+                                publicPath: '../'
                             }
                         },
                         {
@@ -134,7 +135,8 @@ module.exports = (...env) => {
                             loader: MiniCssExtractPlugin.loader,
                             options: {
                                 hmr: !isProd,
-                                reloadAll: true
+                                reloadAll: true,
+                                publicPath: '../'
                             }
                         },
                         {

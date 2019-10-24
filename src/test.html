@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>selection area</title>
+    <style>
+        .table-box{
+            text-align: center;
+            table-layout: fixed;
+            border-collapse: collapse;
+            overflow: inherit;
+            border-color: transparent;
+            border:1px solid #dee2ee;
+            width: 900px;
+            margin-top: 30px;
+            margin-left: 30px;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            box-sizing: border-box;
+        }
+        .selection-area{
+            position: absolute;
+            z-index: 999999999;
+            border:1px solid #016FD2;
+        }
+        #table-head{
+            width:100%;
+            overflow-y:scroll;
+            overflow-x: none;
+        }
+        #selection-body{
+            width: 100%;
+            position: relative;
+            overflow-y:scroll;
+            overflow-x: hidden;
+            height: 500px;
+        }
+        .scroll-ul{
+            width:100%;
+            margin:0;
+            padding: 0;
+            list-style: none;
+        }
+        .data-row{
+            width: 100%;
+            overflow: hidden;
+            border-top:1px solid #dee2ee;
+        }
+        .cell-span{
+            float: left;
+            width: calc(100% / 7);
+            border-right:1px solid #dee2ee;
+            padding: 5px 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+        .cell-span:last-child{
+            border-right: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-box">
+        <div id="table-head">
+            <span class="cell-span">列一</span>
+            <span class="cell-span">列二</span>
+            <span class="cell-span">列三</span>
+            <span class="cell-span">列四</span>
+            <span class="cell-span">列五</span>
+            <span class="cell-span">列六</span>
+            <span class="cell-span">列七</span>
+        </div>
+        <div id="selection-body">
+            <ul class="scroll-ul">
+                <li class="data-row">
+                    <span class="cell-span">测试内容一<b>ddd <i>dcccc</i></b></span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+var selectionBody = document.querySelector('#selection-body');
+var scrollUl = selectionBody.querySelector('.scroll-ul');
+
+// 创建选区div
+var selectionArea = document.createElement('div');
+selectionArea.className = 'selection-area';
+
+const tableBodyWidth = selectionBody.offsetWidth; // table body的宽度值
+const tableBodyHeight = selectionBody.offsetHeight; // table body的高度值
+
+// 开始区域选择的起始点的坐标
+let startX = 0;
+let startY = 0;
+
+// table body距离左边缘的距离和上边缘的距离, 即画布原点
+const {top: tableBodyPositionY, left: tableBodyPositionX} = computedFarFromTopLeft(selectionBody);
+
+selectionBody.addEventListener('mousedown', (e) => { // 鼠标按下
+    console.log('mousedown:', e);
+    const mousePosition = computedMousePosition(e); // 初始化获取鼠标坐标点
+    const activeElePosition = computedFarFromTopLeft(findActiveEleParentCell(e)); // 获取当前鼠标点击的元素距离顶部和底部的距离
+    console.log(activeElePosition);
+
+    // 记录选区的起始坐标点，相对于滚动区域
+    startX = mousePosition.x - tableBodyPositionX;
+    startY = mousePosition.y - tableBodyPositionY;
+
+    // 初始化选区原点坐标
+    selectionArea.style.top = startX + 'px';
+    selectionArea.style.left = startY + 'px';
+    selectionArea.style.width = 0 + 'px';
+    selectionArea.style.height = 0 + 'px';
+
+    scrollUl.appendChild(selectionArea); // 将选框div注入dom树中
+
+    selectionBody.addEventListener('mousemove', mouseMove);
+    selectionBody.addEventListener('mouseup', mouseUp);
+});
+
+function mouseMove(e) { // 鼠标移动
+    const mousePosition = computedMousePosition(e); // 移动时获取相对于滚动区域的鼠标坐标点
+    const areaDiv = selectionBody.querySelector('.selection-area');// 拿到选区dom对象
+    scrollToPosition(e); // 滚动条自动滚动
+
+    // 计算鼠标移动的方向,以及对应位置的差值
+    const minusX = (mousePosition.x - tableBodyPositionX) - startX;
+    const minusY = (mousePosition.y - tableBodyPositionY) - startY;
+
+    let areaWidth = Math.abs(minusX) || 0;
+    let areaHeight = Math.abs(minusY) || 0;
+    let areaTop = startY;
+    let areaLeft = startX;
+    if (minusX > 0 && minusY < 0) { // 向右上方移动，原点位置向上移动
+        areaTop = mousePosition.y - tableBodyPositionY;
+        checkMouseInContain(e, mousePosition); // 判断鼠标是否在滚动区域内
+    }
+    if (minusX > 0 && minusY > 0) { // 向右下方移动，原点位置不变
+        areaTop = startY;
+        areaLeft = startX;
+    }
+    if (minusX < 0 && minusY < 0) { // 向左上方移动，原点位置向左上方移动
+        areaTop = mousePosition.y - tableBodyPositionY;
+        areaLeft = mousePosition.x - tableBodyPositionX;
+    }
+    if (minusX < 0 && minusY > 0) { // 向左下方移动，原点位置向左移动
+        areaLeft = mousePosition.x - tableBodyPositionX;
+    }
+
+    areaDiv.style.width = areaWidth + 'px';
+    areaDiv.style.height = areaHeight + 'px';
+    areaDiv.style.top = areaTop + 'px';
+    areaDiv.style.left = areaLeft + 'px';
+    console.log('mousemove:', e);
+}
+
+function mouseUp(e) { // 鼠标弹起
+    selectionBody.removeEventListener('mousemove', mouseMove);
+    const areaDiv = selectionBody.querySelector('.selection-area');
+    scrollUl.removeChild(areaDiv);
+}
+
+function computedFarFromTopLeft(ele) { // 计算元素距离顶部和左边的绝对距离
+    let topTotal = ele.offsetTop || 0; // 距离顶部的总距离
+    let leftTotal = ele.offsetLeft || 0; // 距离左侧的总距离
+    let eleParent = ele.offsetParent || null; // 元素的父级
+    while (eleParent) { // 元素有父级
+        topTotal += (eleParent.offsetTop || 0);
+        leftTotal += (eleParent.offsetLeft || 0);
+        eleParent = eleParent.offsetParent || null;
+    }
+    return {
+        top: topTotal,
+        left: leftTotal
+    };
+}
+
+function computedMousePosition(e) { // 相对于滚动内容区域，计算出鼠标的位置，包含滚动的值
+    return {
+        x: e.clientX + selectionBody.scrollLeft || 0,
+        y: e.clientY + selectionBody.scrollTop || 0
+    };
+}
+
+function checkMouseInContain(e, mousePosition) { // 判断鼠标是否在滚动区域内
+    let inContainX = 0;
+    let inContainY = 0;
+    if (e.pageX <= tableBodyPositionX) { // 鼠标向左移出滚动区域
+        inContainX = -1;
+    }
+    if (e.pageX >= (tableBodyPositionX + tableBodyWidth)) { // 鼠标向右移出滚动区域
+        inContainX = 1;
+    }
+
+    if (e.pageY <= tableBodyPositionY) { // 鼠标向上移出滚动区域
+        inContainY = -1;
+    }
+    if (e.pageY >= (tableBodyPositionY + tableBodyHeight)) { // 鼠标向下移出滚动区域
+        inContainY = 1;
+    }
+    return {
+        inContainX, 
+        inContainY
+    };
+}
+
+function scrollToPosition(e) { // 计算鼠标位置，自动滚动
+    if (e.clientY - tableBodyPositionY <= 35 && selectionBody.scrollTop > 0) { // 鼠标上移，向下滚动
+        selectionBody.scrollTo({
+            top: selectionBody.scrollTop - 58,
+            left:0,
+            behavior: 'smooth'
+        });
+    }
+    const canScrollContain = selectionBody.scrollHeight - (selectionBody.scrollTop + tableBodyHeight);
+    const scrollClientY = tableBodyPositionY + tableBodyHeight;
+    if (scrollClientY - e.clientY <= 35 && canScrollContain > 0) {
+        selectionBody.scrollTo({
+            top: selectionBody.scrollTop + 58,
+            left:0,
+            behavior: 'smooth'
+        });
+    }
+}
+
+function findActiveEleParentCell(e) { // 找到对应的单元格元素对象
+    const target = e.target;
+    if (target.classList.contains('cell-span')) { // 当前触发点击事件的是单元格
+        return target;
+    }
+    // 触发点击事件是子节点
+    const parentEle = target.parentNode;
+    while (!parentEle.classList.contains('cell-span') && !parentEle.classList.contains('data-row')) {
+        parentEle = parentEle.parentNode;
+    }
+    return parentEle;
+}
+
+</script>
+</html>

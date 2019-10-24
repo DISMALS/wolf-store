@@ -28,7 +28,7 @@ module.exports = (...env) => {
         mode: NODE_ENV,
         entry: {
             polyfill: path.resolve(__dirname, '../src/polyfill.js'),
-            main: path.resolve(__dirname, '../src/main.tsx'),
+            app: path.resolve(__dirname, '../src/app.tsx'),
 
         },
         output: {
@@ -85,7 +85,7 @@ module.exports = (...env) => {
                     //     test(module, chunks) {
                     //         console.log(module.constructor.name);
                     //         console.log(module.issuer.name);
-                    //         return module.constructor.name === 'cssModule' && findModule(module) === 'main';
+                    //         return module.constructor.name === 'cssModule' && findModule(module) === 'app';
                     //     },
                     //     name: 'styles',
                     //     test: /index.less/,

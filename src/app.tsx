@@ -21,13 +21,13 @@ class App extends React.Component {
             <BrowserRouter>
                 <React.Suspense fallback="<div>loading...3332222</div>">
                     <Switch>
-                        <Redirect exact from="/" to="/login"></Redirect>
                         <Route exact path="/login" component={Login}></Route>
                         <Route exact path="/main" render={() => {
                             return (
                                 <Main></Main>
                             );
                         }}></Route>
+                        <Redirect exact from="/" to="/login"></Redirect>
                         <Redirect to="/login"></Redirect>
                     </Switch>
                 </React.Suspense>

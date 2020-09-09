@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>selection area</title>
+    <style>
+        .table-box{
+            text-align: center;
+            table-layout: fixed;
+            border-collapse: collapse;
+            overflow: inherit;
+            border-color: transparent;
+            border:1px solid #dee2ee;
+            width: 900px;
+            margin-top: 30px;
+            margin-left: 30px;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            box-sizing: border-box;
+        }
+        .selection-area{
+            position: absolute;
+            z-index: 999999999;
+            border:1px solid #016FD2;
+            background-color:rgba(230,247,255,0.5);
+        }
+        #table-head{
+            width:100%;
+            overflow-y:scroll;
+            overflow-x: none;
+        }
+        #selection-body{
+            width: 100%;
+            position: relative;
+            overflow-y:scroll;
+            overflow-x: hidden;
+            height: 500px;
+        }
+        .scroll-ul{
+            width:100%;
+            margin:0;
+            padding: 0;
+            list-style: none;
+        }
+        .data-row{
+            width: 100%;
+            overflow: hidden;
+            border-top:1px solid #dee2ee;
+        }
+        .cell-span{
+            float: left;
+            width: calc(100% / 7);
+            border-right:1px solid #dee2ee;
+            padding: 5px 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+        .cell-span:last-child{
+            border-right: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-box">
+        <div id="table-head">
+            <span class="cell-span">列一</span>
+            <span class="cell-span">列二</span>
+            <span class="cell-span">列三</span>
+            <span class="cell-span">列四</span>
+            <span class="cell-span">列五</span>
+            <span class="cell-span">列六</span>
+            <span class="cell-span">列七</span>
+        </div>
+        <div id="selection-body">
+            <ul class="scroll-ul">
+                <li class="data-row">
+                    <span class="cell-span">测试内容一<b>ddd <i>dcccc</i></b></span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+                <li class="data-row">
+                    <span class="cell-span">测试内容一</span>
+                    <span class="cell-span">测试内容二</span>
+                    <span class="cell-span">测试内容三</span>
+                    <span class="cell-span">测试内容四</span>
+                    <span class="cell-span">测试内容五</span>
+                    <span class="cell-span">测试内容六</span>
+                    <span class="cell-span">测试内容七</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+var selectionBody = document.querySelector('#selection-body');
+var scrollUl = selectionBody.querySelector('.scroll-ul');
+
+
+
+const tableBodyWidth = selectionBody.offsetWidth; // table body的宽度值
+const tableBodyHeight = selectionBody.offsetHeight; // table body的高度值
+
+// 开始区域选择的起始点的坐标
+let startX = 0;
+let startY = 0;
+
+// 选区的宽高以及原点坐标
+let areaWidth = 0;
+let areaHeight = 0;
+let areaTop = 0;
+
+// 鼠标移动时的位置，对应的单元格
+let rowColumnValue = null;
+// 开始时对应的单元格
+let startEle = null;
+
+// table body距离左边缘的距离和上边缘的距离, 即画布原点
+const {top: tableBodyPositionY, left: tableBodyPositionX} = computedFarFromTopLeft(selectionBody);
+
+selectionBody.addEventListener('mousedown', (e) => { // 鼠标按下
+    console.log('mousedown:', e);
+    // 创建选区div
+    var selectionArea = document.createElement('div');
+    selectionArea.className = 'selection-area';
+
+    const isKeppOn = cleanSelectionArea(e, scrollUl, selectionBody, '.selection-area'); // 清除之前的选区
+    if (isKeppOn === false) { return; }
+
+    const mousePosition = computedMousePosition(e); // 初始化获取鼠标坐标点
+    const eventEle = findActiveEleParentCell(e); // 获取当前鼠标点击的单元格
+    const activeElePosition = computedFarFromTopLeft(eventEle); // 获取单元格距离上边和左边的距离
+
+    // 记录选区的起始坐标点，相对于滚动区域
+    startX = activeElePosition.left - tableBodyPositionX;
+    startY = activeElePosition.top - tableBodyPositionY;
+
+    // 初始化选区原点坐标
+    selectionArea.style.top = `${startY > 0 ? startY - 1 : startY}px`;
+    selectionArea.style.left = `${startX > 0 ? startX - 1 : startX}px`;
+    selectionArea.style.width = `${eventEle.offsetWidth}px`;
+    selectionArea.style.height =  `${eventEle.offsetHeight}px`;
+    scrollUl.appendChild(selectionArea); // 将选框div注入dom树中
+    selectionMain(e); // 单击时获取单元格
+
+    selectionBody.addEventListener('mousemove', selectionMain);
+    selectionBody.addEventListener('mouseup', mouseUp);
+});
+
+function mouseUp(e) { // 鼠标弹起
+    console.log(rowColumnValue, startEle);
+    selectionBody.removeEventListener('mousemove', selectionMain);
+}
+
+function selectionMain(e) { // 选区操作主函数
+    const mousePosition = computedMousePosition(e); // 移动时获取相对于滚动区域的鼠标坐标点
+    const areaDivs = selectionBody.querySelectorAll('.selection-area');// 拿到选区dom对象
+    scrollToPosition(e); // 滚动条自动滚动
+
+    // 鼠标相对于滚动区域内的坐标
+    const left = Math.abs(mousePosition.x - tableBodyPositionX);
+    const top = Math.abs(mousePosition.y - tableBodyPositionY);
+
+    // 计算鼠标移动的方向,以及对应位置的差值
+    const minusX = left - startX;
+    const minusY = top - startY;
+
+    // 初始化选区宽高以及原点坐标
+    areaWidth = Math.abs(minusX) || 0;
+    areaHeight = Math.abs(minusY) || 0;
+    areaTop = startY || 0;
+    areaLeft = startX || 0;
+
+    if (minusX > 0 && minusY < 0) { // 向右上方移动，原点位置向上移动
+        rowColumnValue = computedRowHeightColumnWidth('RIGHTTOP', {left, top}, '.data-row', '.cell-span');
+        areaTop = rowColumnValue.topValue;
+        areaWidth = Math.abs(rowColumnValue.leftValue - startX);
+        areaHeight = Math.abs(rowColumnValue.topValue - startY);
+        startEle = computedRowHeightColumnWidth('RIGHTTOP', {left: startX + 5, top: startY - 5}, '.data-row', '.cell-span');
+    }
+    if (minusX > 0 && minusY > 0) { // 向右下方移动，原点位置不变
+        rowColumnValue = computedRowHeightColumnWidth('RIGHTBOTTOM', {left, top}, '.data-row', '.cell-span');
+        areaWidth = Math.abs(rowColumnValue.leftValue - startX);
+        areaHeight = Math.abs(rowColumnValue.topValue - startY);
+        startEle = computedRowHeightColumnWidth('RIGHTBOTTOM', {left: startX + 5, top: startY + 5}, '.data-row', '.cell-span');
+    }
+    if (minusX < 0 && minusY < 0) { // 向左上方移动，原点位置向左上方移动
+        rowColumnValue = computedRowHeightColumnWidth('LEFTTOP', {left, top}, '.data-row', '.cell-span');
+        startEle = computedRowHeightColumnWidth('LEFTTOP', {left: startX - 5, top: startY + 5}, '.data-row', '.cell-span');
+        areaTop = rowColumnValue.topValue;
+        areaLeft = rowColumnValue.leftValue;
+
+        areaWidth = Math.abs(rowColumnValue.leftValue - startX);
+        areaHeight = Math.abs(rowColumnValue.topValue - startY);
+    }
+    if (minusX < 0 && minusY > 0) { // 向左下方移动，原点位置向左移动
+        rowColumnValue = computedRowHeightColumnWidth('LEFTBOTTOM', {left, top}, '.data-row', '.cell-span');
+        startEle = computedRowHeightColumnWidth('LEFTBOTTOM', {left: startX - 5, top: startY - 5}, '.data-row', '.cell-span');
+        areaLeft = rowColumnValue.leftValue;
+        areaWidth = Math.abs(rowColumnValue.leftValue - startX);
+        areaHeight = Math.abs(rowColumnValue.topValue - startY);
+    }
+
+    areaDivs[areaDivs.length - 1].style.width = `${areaWidth > 0 ? areaWidth - 1 : areaWidth}px`;
+    areaDivs[areaDivs.length - 1].style.height = `${areaHeight > 0 ? areaHeight - 1 : areaHeight}px`;
+    areaDivs[areaDivs.length - 1].style.top = `${areaTop > 0 ? areaTop - 1 : areaTop}px`;
+    areaDivs[areaDivs.length - 1].style.left = `${areaLeft > 0 ? areaLeft - 1 : areaLeft}px`;
+}
+
+function computedFarFromTopLeft(ele) { // 计算元素距离顶部和左边的绝对距离
+    if (!ele) { return; }
+    let topTotal = ele.offsetTop || 0; // 距离顶部的总距离
+    let leftTotal = ele.offsetLeft || 0; // 距离左侧的总距离
+    let eleParent = ele.offsetParent || null; // 元素的父级
+    while (eleParent) { // 元素有父级
+        topTotal += (eleParent.offsetTop || 0);
+        leftTotal += (eleParent.offsetLeft || 0);
+        eleParent = eleParent.offsetParent || null;
+    }
+    return {
+        top: topTotal,
+        left: leftTotal
+    };
+}
+
+function computedMousePosition(e) { // 计算出鼠标的位置，包含滚动的值
+    return {
+        x: e.clientX + selectionBody.scrollLeft || 0,
+        y: e.clientY + selectionBody.scrollTop || 0
+    };
+}
+
+function checkMouseInContain(e, mousePosition) { // 判断鼠标是否在滚动区域内
+    let inContainX = 0;
+    let inContainY = 0;
+    if (e.pageX <= tableBodyPositionX) { // 鼠标向左移出滚动区域
+        inContainX = -1;
+    }
+    if (e.pageX >= (tableBodyPositionX + tableBodyWidth)) { // 鼠标向右移出滚动区域
+        inContainX = 1;
+    }
+
+    if (e.pageY <= tableBodyPositionY) { // 鼠标向上移出滚动区域
+        inContainY = -1;
+    }
+    if (e.pageY >= (tableBodyPositionY + tableBodyHeight)) { // 鼠标向下移出滚动区域
+        inContainY = 1;
+    }
+    return {
+        inContainX, 
+        inContainY
+    };
+}
+
+function scrollToPosition(e) { // 根据鼠标位置判断是否滚动
+    if (e.clientY - tableBodyPositionY <= 35 && selectionBody.scrollTop > 0) { // 鼠标上移，向下滚动
+        selectionBody.scrollTo({
+            top: selectionBody.scrollTop - 58,
+            left:0,
+            behavior: 'smooth'
+        });
+    }
+    const canScrollContain = selectionBody.scrollHeight - (selectionBody.scrollTop + tableBodyHeight);
+    const scrollClientY = tableBodyPositionY + tableBodyHeight;
+    if (scrollClientY - e.clientY <= 35 && canScrollContain > 0) {
+        selectionBody.scrollTo({
+            top: selectionBody.scrollTop + 58,
+            left:0,
+            behavior: 'smooth'
+        });
+    }
+}
+
+function findActiveEleParentCell(e) { // 找到点击时对应的单元格元素对象
+    const target = e.target;
+    if (target.classList.contains('cell-span')) { // 当前触发点击事件的是单元格
+        return target;
+    }
+    // 触发点击事件是子节点
+    let parentEle = target.parentNode;
+    while (parentEle && parentEle.classList.length > 0 && !parentEle.classList.contains('cell-span') && !parentEle.classList.contains('data-row')) {
+        if (parentEle.parentNode) {
+            parentEle = parentEle.parentNode;
+        }
+    }
+    return parentEle;
+}
+
+function computedRowHeightColumnWidth(direction, baseData, seletorRow, selectorColumn) { // 计算鼠标所处的位置，相对于可选区域
+    const dataRow = Array.prototype.slice.call(selectionBody.querySelectorAll(seletorRow));
+    const dataColumn = Array.prototype.slice.call(dataRow[0].querySelectorAll(selectorColumn));
+    let topValue = 0;
+    let leftValue = 0;
+    let prevEleRow = null;
+    let prevEleColumn = null;
+    let rowNum = 0;
+    let columnNum = 0;
+    dataRow.some((ele, i) => { // 距离上边的距离
+        if (topValue >= baseData.top) {
+            prevEleRow = dataRow[i - 1];
+            return true;
+        }
+        topValue += ele.offsetHeight;
+        rowNum = i;
+    });
+    dataColumn.some((ele, i) => { // 距离左边的距离
+        if (leftValue >= baseData.left) {
+            prevEleColumn = dataColumn[i - 1];
+            return true;
+        }
+        leftValue += ele.offsetWidth;
+        columnNum = i;
+    });
+    
+    switch (direction) {
+        case 'RIGHTTOP': // 右上方top值减小
+            topValue -= prevEleRow.offsetHeight;
+        break;
+        case 'LEFTTOP': // 左上方top值减小
+            topValue -= prevEleRow.offsetHeight;
+            leftValue -= prevEleColumn.offsetWidth;
+        break;
+        case 'LEFTBOTTOM': // 左下left值减小
+            leftValue -= prevEleColumn.offsetWidth;
+        break;
+        default:
+        break;
+    }
+    return { 
+        rowNum,
+        columnNum,
+        topValue: Math.abs(topValue),
+        leftValue:  Math.abs(leftValue),
+    };
+}
+
+function cleanSelectionArea(e, scrollContext, selectionBody, selectionAreaEle) { // 清除之前的选区
+    const downTarget = e.target;
+    if (downTarget.classList.contains('selection-area')) {
+        const areaDivs = selectionBody.querySelectorAll(selectionAreaEle);
+        if (areaDivs.length > 0) { // 选区存在则清除
+            Array.prototype.slice.call(areaDivs).forEach(element => {
+                scrollContext.removeChild(element);
+            });
+        }
+        return false;
+    }
+}
+
+
+
+
+</script>
+</html>

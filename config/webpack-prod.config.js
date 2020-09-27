@@ -7,7 +7,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const HappyPackPlugin = require('./happypack-config');
 module.exports = (config) => {
-    config = {
+    const newConfig = {
         ...config,
         output: {
             ...config.output,
@@ -26,7 +26,7 @@ module.exports = (config) => {
             removeAvailableModules: true
         }
     };
-    config.plugins.push(
+    newConfig.plugins.push(
         new WorkboxWebpackPlugin.GenerateSW({ // PWD离线缓存策略
             cacheId: 'webpack-pwa', // 设置前缀
             skipWaiting: true, // 强制等待中的 Service Worker 被激活
@@ -76,5 +76,5 @@ module.exports = (config) => {
             manifest: path.resolve(__dirname, '../src/manifest.json')
         })
     );
-    return config;
+    return newConfig;
 }
